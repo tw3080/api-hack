@@ -3,10 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>Instagram Map Thing</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <div class="map">
-    
+  <div class="search">
+    <input id="address" type="text" placeholder="Where to?" />
+    <button id="submit" type="submit">Submit</button>
   </div>
+  <div id="map">
+
+  </div>
+  <script src="//code.jquery.com/jquery.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBW-hUSjC0jN5IKre7PDMWgBBO2YV8EMng&callback=initMap"
+    async defer></script>
 </body>
 </html>
