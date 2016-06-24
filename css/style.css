@@ -1,4 +1,9 @@
-#map {
+#map,
+#gallery {
   width: 600px;
   height: 350px;
+}
+
+#gallery {
+  background-color: #dedede;
 }
