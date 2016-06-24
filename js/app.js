@@ -30,9 +30,8 @@ function geocodeAddress(geocoder, resultsMap) {
     lng = results[0].geometry.location.lng();
     console.log(lat);
     console.log(lng);
+    getMedia(lat, lng);
     getLocationId(lat, lng);
-    // console.log(lat);
-    // console.log(lng);
     if (status === google.maps.GeocoderStatus.OK) {
       resultsMap.setCenter(results[0].geometry.location);
       // Adds marker for each searched address on map
@@ -48,32 +47,16 @@ function geocodeAddress(geocoder, resultsMap) {
   });
 }
 
-/* Convert lat/long returned by geocodeAddress() to a location-id for use with
-   instagram API */
-function getLocationId(lat, long) {
-  var locationId = 'lat=' + lat + '&lng=' + lng;
+/* Gets media from the specific location which user enters; accepts lat/long from
+   geocodeAddress() */
+function getMedia(lat, long) {
+  var location = 'lat=' + lat + '&lng=' + lng;
   var accessToken = '12026246.e899233.1086d94709f141a1b483c6c135202080';
-  var url = 'https://api.instagram.com/v1/locations/search?' + locationId + '&access_token=' + accessToken;
+  var url = 'https://api.instagram.com/v1/media/search?' + location + '&access_token=' + accessToken;
   $.ajax({
     url: url,
-    dataType: "jsonp",
-    type: "GET",
-    distance: 0,
-    success: function(response) {
-      console.log(response);
-    }
-  });
-}
-
-// Gets Instagram posts by location
-function getPosts(location) {
-  var locationId = location;
-  var accessToken = '12026246.e899233.1086d94709f141a1b483c6c135202080';
-  var url = 'https://api.instagram.com/v1/locations/' + locationId + '/media/recent?access_token=' + accessToken;
-  $.ajax({
-    url: url,
-    dataType: "jsonp",
-    type: "GET",
+    dataType: 'jsonp',
+    type: 'GET',
     success: function(response) {
       console.log(response);
     }
