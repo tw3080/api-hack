@@ -1,6 +1,7 @@
-/*
-Instagram access token: 12026246.e899233.1086d94709f141a1b483c6c135202080
-*/
+// Initialize variables
+var flickrKey = 'bd5883080cd861f2e51ffc57c3e6b717';
+var radius = 1.5;
+var gallery = $('#gallery');
 
 // Initialize map
 function initMap() {
@@ -30,8 +31,7 @@ function geocodeAddress(geocoder, resultsMap) {
     lng = results[0].geometry.location.lng();
     console.log(lat);
     console.log(lng);
-    getMedia(lat, lng);
-    getLocationId(lat, lng);
+    getPhotos(lat, lng);
     if (status === google.maps.GeocoderStatus.OK) {
       resultsMap.setCenter(results[0].geometry.location);
       // Adds marker for each searched address on map
@@ -47,20 +47,72 @@ function geocodeAddress(geocoder, resultsMap) {
   });
 }
 
-/* Gets media from the specific location which user enters; accepts lat/long from
-   geocodeAddress() */
-function getMedia(lat, long) {
-  var location = 'lat=' + lat + '&lng=' + lng;
-  var accessToken = '12026246.e899233.1086d94709f141a1b483c6c135202080';
-  var url = 'https://api.instagram.com/v1/media/search?' + location + '&access_token=' + accessToken;
+/*
+// Gets flickr photos (public only) based on the location inputted by the user
+function getPhotos(lat, lng) {
+  var params = {
+    api_key: 'e4aee99e08367dcf3791594e042828f2',
+    lat: lat,
+    lon: lng,
+    radius: '1.5',
+    radius_units: 'mi',
+    format: 'json',
+    auth_token: '72157667454977864-f884690a7d37dfbf'
+  };
+  url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search';
+
+  $.getJSON(url, params, function(data) {
+    console.log(data);
+  });
+  */
+
+// Gets flickr photos (public only) based on the location inputted by the user
+function getPhotos(lat, lng) {
+  var params = {
+    format: 'json',
+    method: 'flickr.photos.search',
+    api_key: flickrKey,
+    nojsoncallback: 1,
+    lat: lat,
+    lon: lng,
+    radius: radius,
+    radius_units: 'mi'
+  };
+
   $.ajax({
-    url: url,
-    dataType: 'jsonp',
+    url: 'https://api.flickr.com/services/rest/',
     type: 'GET',
+    data: params,
     success: function(response) {
       console.log(response);
     }
+  })
+  .fail(function(jqXHR, error) {
+    console.log('fail');
   });
+  /*
+  .done(function(result) {
+    console.log(result);
+  });
+  */
+  /*
+  var apiKey = 'e4aee99e08367dcf3791594e042828f2';
+  var location = '&lat=' + lat + '&lon=' + lng;
+  var radius = 1.5;
+  var radiusUnits = 'mi';
+  var url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' +
+  apiKey +
+  location +
+  '&radius=' +
+  radius +
+  '&radius_units=' +
+  radiusUnits +
+  '&format=json&auth_token=72157667454977864-f884690a7d37dfbf';
+  var url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=e4aee99e08367dcf3791594e042828f2&lat=47.60621&lon=-122.332071&radius=1.5&radius_units=mi&format=json&auth_token=72157667454977864-f884690a7d37dfbf&api_sig=10aeed3cf8b26421294f569892559e0b';
+  $.getJSON(url, function(data) {
+    console.log(data);
+  });
+  */
 }
 
 $(function() {
