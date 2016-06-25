@@ -56,7 +56,8 @@ function getPhotos(lat, lng) {
     lat: lat,
     lon: lng,
     radius: radius,
-    radius_units: 'mi'
+    radius_units: 'mi',
+    per_page: 10,
   };
 
   $.ajax({
@@ -75,12 +76,13 @@ function getPhotos(lat, lng) {
           '_' +
           item.secret +
           '.jpg';
-        // var a = $('<a>').attr('href', '#');
+        // TODO: Replace URL with my own expanded gallery view
+        var a = $('<a>').attr('href', url);
         var img = $('<img>').attr('src', url);
-        // a.append(img);
-        // $('#gallery').append(a);
-        $('#gallery').append(img);
+        a.append(img);
+        gallery.append(a);
       });
+      gallery.justifiedGallery();
     }
   })
   // TODO: Add a more descriptive error alert/message
