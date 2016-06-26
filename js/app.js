@@ -1,4 +1,5 @@
 // Initialize variables
+var map;
 var inputLocation = '';
 var photoGallery = [];
 var gallery = $('#gallery');
@@ -9,17 +10,18 @@ var flickrKey = 'bd5883080cd861f2e51ffc57c3e6b717';
 var radius = 1; // Default search radius of 1 mile
 var accuracy = 12; // Default accuracy, city level
 var perPage = 10; // Default number of pictures to display per page in gallery
-var flickrPage = 1;
+var page = 1; // Flickr page number
 
 // Initialize map
 function initMap() {
-  var map = new google.maps.Map(document.getElementById('map'), {
+  var mapProp = {
     // Center initializes to Seattle, WA
     /* TODO: possibly use user's geolocation to initially center map? Or just
        don't show a map before initial search? */
     center: new google.maps.LatLng(latLng[0], latLng[1]),
-    zoom: 12
-  });
+    zoom: 12 // Zoom defaults to city-level
+  };
+  map = new google.maps.Map(document.getElementById('map'), mapProp);
 }
 
 // Gets geocode based on location which the user inputted
@@ -35,7 +37,7 @@ function geocodeAddress(location) {
     data: params
   })
   .success(function(response) {
-    console.log(response);
+    // console.log(response);
     latLng = [];
     latLng.push(response.results[0].geometry.location.lat);
     latLng.push(response.results[0].geometry.location.lng);
@@ -46,29 +48,6 @@ function geocodeAddress(location) {
     console.log('fail');
   });
 }
-
-/*
-function geocodeAddress(geocoder, resultsMap) {
-  var address = document.getElementById('address').value;
-  geocoder.geocode({'address': address}, function(results, status) {
-    // Global latititude and longitude variables
-    lat = results[0].geometry.location.lat();
-    lng = results[0].geometry.location.lng();
-    getPhotos(lat, lng);
-    if (status === google.maps.GeocoderStatus.OK) {
-      resultsMap.setCenter(results[0].geometry.location);
-      // Adds marker for each searched address on map
-      /*
-      var marker = new google.maps.Marker({
-        map: resultsMap,
-        position: results[0].geometry.location
-      });
-      */
-    //} else {
-      //alert('Geocode was not successful for the following reason: ' + status);
-    //}
-//  });
-//}
 
 // Gets flickr photos (public only) based on location inputted by the user
 function getPhotos(coordinate) {
@@ -85,7 +64,7 @@ function getPhotos(coordinate) {
     radius_units: 'mi',
     extras: 'geo',
     per_page: perPage,
-    page: flickrPage
+    page: page
   };
 
   $.ajax({
@@ -94,7 +73,7 @@ function getPhotos(coordinate) {
     data: params,
   })
   .success(function(response) {
-    // console.log(response);
+    console.log(response);
     $.each(response.photos.photo, function(i, item) {
       var url = 'http://farm' +
         item.farm +
@@ -111,7 +90,16 @@ function getPhotos(coordinate) {
       var img = $('<img>').attr('src', url);
       a.append(img);
       gallery.append(a);
-      // Creates map marker for each photo on the page
+      // Store latitude and longitude of each item in variable
+      lat = item.latitude;
+      lng = item.longitude;
+      // Create a marker on map for each photo
+      var myLatLng = new google.maps.LatLng(lat,lng);
+      var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: 'Photo'
+      });
     });
     // Arranges images in a justified Gallery
     gallery.justifiedGallery();
