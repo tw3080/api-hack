@@ -3,6 +3,7 @@ var flickrKey = 'bd5883080cd861f2e51ffc57c3e6b717';
 var radius = 1;
 var photoGallery = [];
 var gallery = $('#gallery');
+var search = $('.search-bar');
 
 // Initialize map
 function initMap() {
@@ -15,8 +16,9 @@ function initMap() {
   var geocoder = new google.maps.Geocoder();
   // Submit button click event
   // TODO: pressing enter should have same affect as clicking button
-  $('.search-bar').submit(function(e) {
+  search.submit(function(e) {
     e.preventDefault();
+    gallery.html(''); // Clears the gallery upon new search
     geocodeAddress(geocoder, map);
     // var location = $(this).find('#address').val();
   });
@@ -53,10 +55,12 @@ function getPhotos(lat, lng) {
     api_key: flickrKey,
     nojsoncallback: 1,
     accuracy: 12,
+    has_geo: 1,
     lat: lat,
     lon: lng,
     radius: radius,
     radius_units: 'mi',
+    extras: 'geo',
     per_page: 10,
   };
 
@@ -65,7 +69,7 @@ function getPhotos(lat, lng) {
     type: 'GET',
     data: params,
     success: function(response) {
-      // Appends photos to #gallery
+      console.log(response);
       $.each(response.photos.photo, function(i, item) {
         var url = 'http://farm' +
           item.farm +
@@ -77,11 +81,14 @@ function getPhotos(lat, lng) {
           item.secret +
           '.jpg';
         // TODO: Replace URL with my own expanded gallery view
+        // Appends photos to #gallery
         var a = $('<a>').attr('href', url);
         var img = $('<img>').attr('src', url);
         a.append(img);
         gallery.append(a);
+        // Creates map marker for each photo on the page
       });
+      // Arranges images in a justified Gallery
       gallery.justifiedGallery();
     }
   })
@@ -90,9 +97,3 @@ function getPhotos(lat, lng) {
     console.log('fail');
   });
 }
-
-$(function() {
-  $('.search-bar').submit(function(e) {
-
-  });
-});
