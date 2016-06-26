@@ -74,7 +74,8 @@ function getPhotos(coordinate) {
     data: params,
   })
   .success(function(response) {
-    console.log(response);
+    // console.log(response);
+    var infoWindow = new google.maps.InfoWindow();
     $.each(response.photos.photo, function(i, item) {
       var url = 'http://farm' +
         item.farm +
@@ -99,7 +100,11 @@ function getPhotos(coordinate) {
       var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
-        title: 'Photo'
+        // title: 'Photo'
+      });
+      google.maps.event.addListener(marker, 'click', function() {
+        infoWindow.setContent('lol');
+        infoWindow.open(map, marker);
       });
     });
     // Arranges images in a justified Gallery
