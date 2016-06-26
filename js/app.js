@@ -102,6 +102,8 @@ function getPhotos(coordinate) {
         map: map,
         // title: 'Photo'
       });
+      /* Clicking a marker triggers an event which opens a info window
+         displaying the details of a picture */
       google.maps.event.addListener(marker, 'click', function() {
         infoWindow.setContent('lol');
         infoWindow.open(map, marker);
