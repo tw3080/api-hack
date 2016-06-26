@@ -41,6 +41,7 @@ function geocodeAddress(location) {
     latLng = [];
     latLng.push(response.results[0].geometry.location.lat);
     latLng.push(response.results[0].geometry.location.lng);
+    initMap();
     getPhotos(latLng);
   })
   // TODO: Add a more descriptive error alert/message
