@@ -1,11 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   height: 100%;
   width: 100%;
-  margin-top: 0;
-  margin-right: 0;
-  margin-bottom: 0;
-  margin-left: 0;
+  margin: 0;
+  background-color: #2E2E2E;
 }
 
 .main-container {
@@ -20,10 +22,13 @@ body {
 }
 
 /* Search bar */
+/* TODO: Fix positioning; try to center */
 .search {
   position: absolute;
+  top: 1.9%;
+  left: 20.2%;
   width: 75%;
-  z-index: 99
+  z-index: 99;
 }
 
 #address {
@@ -37,18 +42,33 @@ body {
 /* Map */
 #map {
   height: 100%;
-  width: 75%;
+  width: 70%;
   float: left;
 }
 
 /* Image gallery */
 #gallery {
-  width: 25%;
+  width: 30%;
+  height: 100%;
+  /*
   min-height: 100%;
   max-height: 100%;
+  */
   float: left;
-  background-color: #dedede;
+  background-color: #2E2E2E;
   /* TODO: gallery needs a fixed height; image height
      should scale to fit */
   /* max-height: 350px; */
+}
+
+.thumbnail {
+  background-color: black;
+  margin: 0 0 -4px 0;
+  border: 2px solid #2E2E2E;
+  width: 32.9%;
+  height: 33%;
+  display: inline-block; /* makes it fit in like an <img> */
+  background-size: cover; /* or contain */
+  background-position: center center;
+  background-repeat: no-repeat;
 }
