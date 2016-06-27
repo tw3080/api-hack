@@ -9,7 +9,7 @@ var googleKey = 'AIzaSyBW-hUSjC0jN5IKre7PDMWgBBO2YV8EMng';
 var flickrKey = 'bd5883080cd861f2e51ffc57c3e6b717';
 var radius = 1; // Default search radius of 1 mile
 var accuracy = 12; // Default accuracy, city level
-var perPage = 10; // Default number of pictures to display per page in gallery
+var perPage = 9; // Default number of pictures to display per page in gallery
 var page = 1; // Flickr page number
 
 // Initialize map
@@ -88,13 +88,16 @@ function getPhotos(coordinate) {
         '.jpg';
       // TODO: Replace URL with my own expanded gallery view
       // Appends photos to #gallery
+      var thumbnail = '<div class="thumbnail" style="background-image: url(' + url + ');"></div>';
+      /*
       var a = $('<a>').attr('href', url);
       var img = $('<img>').attr('src', url);
       a.append(img);
-      gallery.append(a);
+      */
+      gallery.append(thumbnail);
       // Store latitude and longitude of each item in variable
-      lat = item.latitude;
-      lng = item.longitude;
+      var lat = item.latitude;
+      var lng = item.longitude;
       // Create a marker on map for each photo
       var myLatLng = new google.maps.LatLng(lat,lng);
       var marker = new google.maps.Marker({
@@ -105,7 +108,8 @@ function getPhotos(coordinate) {
       /* Clicking a marker triggers an event which opens a info window
          displaying the details of a picture */
       google.maps.event.addListener(marker, 'click', function() {
-        infoWindow.setContent('lol');
+        // TODO: How do I add jQuery to setContent?
+        infoWindow.setContent('<img src="' + url + '"/>');
         infoWindow.open(map, marker);
       });
     });
