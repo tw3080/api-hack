@@ -23,7 +23,6 @@ body {
 }
 
 /* Search bar */
-/* TODO: Fix positioning; try to center */
 .search {
   position: absolute;
   margin: 10px auto 0 auto;
@@ -61,14 +60,19 @@ body {
   /* max-height: 350px; */
 }
 
+/* Thumbnails in gallery */
 .thumbnail {
   background-color: black;
   margin: 0 0 -4px 0;
-  /* border: 2px solid #dedede; */
   width: 20%;
   height: 100%;
-  display: inline-block; /* makes it fit in like an <img> */
-  background-size: cover; /* or contain */
+  display: inline-block;
+  background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+}
+
+/* Thumbnails in info windows */
+.infoThumb {
+  /* width: 200px; */
 }
