@@ -8,8 +8,8 @@ var latLng = [47.60621, -122.332071]; // Default lat/lng to Seattle, WA
 var googleKey = 'AIzaSyBW-hUSjC0jN5IKre7PDMWgBBO2YV8EMng';
 var flickrKey = 'bd5883080cd861f2e51ffc57c3e6b717';
 var radius = 1; // Default search radius of 1 mile
-var accuracy = 12; // Default accuracy, city level
-var perPage = 9; // Default number of pictures to display per page in gallery
+var accuracy = 15; // Default accuracy, city level
+var perPage = 5; // Default number of pictures to display per page in gallery
 var page = 1; // Flickr page number
 
 // Initialize map
@@ -19,9 +19,15 @@ function initMap() {
     /* TODO: possibly use user's geolocation to initially center map? Or just
        don't show a map before initial search? */
     center: new google.maps.LatLng(latLng[0], latLng[1]),
-    zoom: 12 // Zoom defaults to city-level
+    zoom: 15 // Zoom defaults to city-level
   };
   map = new google.maps.Map(document.getElementById('map'), mapProp);
+  // Re-centers map on window resize
+  google.maps.event.addDomListener(window, 'resize', function() {
+    var center = map.getCenter();
+    google.maps.event.trigger(map, 'resize');
+    map.setCenter(center);
+  });
 }
 
 // Gets geocode based on location which the user inputted
@@ -112,6 +118,15 @@ function getPhotos(coordinate) {
         infoWindow.setContent('<img src="' + url + '"/>');
         infoWindow.open(map, marker);
       });
+      $(thumbnail).click(function() {
+        google.maps.event.trigger(marker, 'click');
+      });
+      /*
+      $(thumbnail).on('click', function() {
+        infoWindow.setContent('<img src="' + url + '"/>');
+        infoWindow.open(map, marker);
+      });
+      */
     });
     // Arranges images in a justified Gallery
     gallery.justifiedGallery();
