@@ -7,27 +7,27 @@ body {
   height: 100%;
   width: 100%;
   margin: 0;
-  background-color: #2E2E2E;
+  background-color: #fff;
 }
 
 .main-container {
   margin: auto;
-  width: 70%;
-  height: 70%;
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+  text-align: center;
 }
 
 /* Search bar */
 /* TODO: Fix positioning; try to center */
 .search {
   position: absolute;
-  top: 1.9%;
-  left: 20.2%;
-  width: 75%;
+  margin: 10px auto 0 auto;
+  width: 100%;
   z-index: 99;
 }
 
@@ -41,21 +41,21 @@ body {
 
 /* Map */
 #map {
-  height: 100%;
-  width: 70%;
-  float: left;
+  height: 70%;
+  width: 100%;
+  /*float: left; */
 }
 
 /* Image gallery */
 #gallery {
-  width: 30%;
-  height: 100%;
+  width: 100%;
+  height: 30%;
   /*
   min-height: 100%;
   max-height: 100%;
   */
-  float: left;
-  background-color: #2E2E2E;
+  /* float: left; */
+  background-color: #dedede;
   /* TODO: gallery needs a fixed height; image height
      should scale to fit */
   /* max-height: 350px; */
@@ -64,9 +64,9 @@ body {
 .thumbnail {
   background-color: black;
   margin: 0 0 -4px 0;
-  border: 2px solid #2E2E2E;
-  width: 32.9%;
-  height: 33%;
+  /* border: 2px solid #dedede; */
+  width: 20%;
+  height: 100%;
   display: inline-block; /* makes it fit in like an <img> */
   background-size: cover; /* or contain */
   background-position: center center;
