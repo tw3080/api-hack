@@ -219,7 +219,9 @@ function initMap() {
     /* TODO: possibly use user's geolocation to initially center map? Or just
        don't show a map before initial search? */
     center: new google.maps.LatLng(latLng[0], latLng[1]),
-    zoom: 15 // Zoom defaults to city-level
+    zoom: 15, // Zoom defaults to city-level
+    mapTypeControl: false,
+    streetViewControl: false
   };
   map = new google.maps.Map(document.getElementById('map'), mapProp);
 
@@ -318,10 +320,10 @@ function getPhotos(coordinate) {
           path: fontawesome.markers.MAP_MARKER,
           scale: 0.65,
           strokeWeight: 0.2,
-          strokeColor: '#000',
+          strokeColor: '#B300FF',
           strokeOpacity: 1,
-          fillColor: '#000',
-          fillOpacity: 1,
+          fillColor: '#B300FF',
+          fillOpacity: 0.75,
         }
         // title: 'Photo'
       });
