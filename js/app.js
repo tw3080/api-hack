@@ -14,6 +14,7 @@ var page = 1; // Flickr page number
 
 // Initialize map
 function initMap() {
+  // TODO: Include these styles in a separate file and link it? Too long
   // Array of custom map styles
   var styles = [
     {
@@ -313,6 +314,15 @@ function getPhotos(coordinate) {
       var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
+        icon: {
+          path: fontawesome.markers.MAP_MARKER,
+          scale: 0.65,
+          strokeWeight: 0.2,
+          strokeColor: '#000',
+          strokeOpacity: 1,
+          fillColor: '#000',
+          fillOpacity: 1,
+        }
         // title: 'Photo'
       });
       /* Clicking a marker triggers an event which opens a info window
