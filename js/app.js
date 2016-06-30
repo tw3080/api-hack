@@ -1,16 +1,16 @@
 // Initialize variables
 var map;
 var inputLocation = '';
-var photoGallery = [];
-var gallery = $('#gallery');
-var search = $('.get-location');
-var latLng = [47.60621, -122.332071]; // Default lat/lng to Seattle, WA
-var googleKey = 'AIzaSyBW-hUSjC0jN5IKre7PDMWgBBO2YV8EMng';
-var flickrKey = 'bd5883080cd861f2e51ffc57c3e6b717';
-var radius = 1; // Default search radius of 1 mile
-var accuracy = 15; // Default accuracy, city level
-var perPage = 5; // Default number of pictures to display per page in gallery
-var page = 1; // Flickr page number
+var photoGallery  = [];
+var gallery       = $('#gallery');
+var search        = $('.get-location');
+var latLng        = [47.60621, -122.332071]; // Default lat/lng to Seattle, WA
+var googleKey     = 'AIzaSyBW-hUSjC0jN5IKre7PDMWgBBO2YV8EMng';
+var flickrKey     = 'bd5883080cd861f2e51ffc57c3e6b717';
+var radius        = 0.5; // Default search radius of 1 mile
+var accuracy      = 15; // Default accuracy, city level
+var perPage       = 5; // Default number of pictures to display per page in gallery
+var page          = 1; // Flickr page number
 
 // Initialize map
 function initMap() {
@@ -286,10 +286,9 @@ function getPhotos(coordinate) {
     data: params,
   })
   .success(function(response) {
-    // console.log(response);
     var infoWindow = new google.maps.InfoWindow();
     $.each(response.photos.photo, function(i, item) {
-      console.log(item);
+      // console.log(item);
       var url = 'http://farm' +
         item.farm +
         '.staticflickr.com/' +
@@ -299,20 +298,15 @@ function getPhotos(coordinate) {
         '_' +
         item.secret +
         '.jpg';
-      // TODO: Replace URL with my own expanded gallery view
       // Appends photos to #gallery
-      var thumbnail = '<div class="thumbnail" style="background-image: url(' + url + ');"></div>';
-      /*
-      var a = $('<a>').attr('href', url);
-      var img = $('<img>').attr('src', url);
-      a.append(img);
-      */
+      var thumbnail = '<div marker=' + '"marker' + i + '" class="thumbnail" style="background-image: url(' + url + ');"></div>';
       gallery.append(thumbnail);
       // Store latitude and longitude of each item in variable
       var lat = item.latitude;
       var lng = item.longitude;
       // Create a marker on map for each photo
       var myLatLng = new google.maps.LatLng(lat,lng);
+      var markers = [];
       var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
@@ -324,28 +318,29 @@ function getPhotos(coordinate) {
           strokeOpacity: 1,
           fillColor: '#B300FF',
           fillOpacity: 0.75,
-        }
+        },
+        id: 'marker' + i
         // title: 'Photo'
       });
+      markers.push(marker);
+      console.log(markers);
       /* Clicking a marker triggers an event which opens a info window
          displaying the details of a picture */
       google.maps.event.addListener(marker, 'click', function() {
         // TODO: How do I add jQuery to setContent?
-        infoWindow.setContent('<img class="infoThumb" src="' + url + '"/>');
+        var thumbnail = $('<img class="infoThumb" src="' + url + '"/>');
+        infoWindow.setContent(thumbnail[0]);
         infoWindow.open(map, marker);
       });
-      $(thumbnail).click(function() {
-        google.maps.event.trigger(marker, 'click');
+      // Shit below here is fucked
+      $('.thumbnail').click(function() {
+        var mapMarker ='#' + $(this).attr('marker');
+        // console.log(mapMarker);
+        google.maps.event.trigger(mapMarker, 'click');
+          infoWindow.setContent('<img class="infoThumb" src="' + url + '"/>');
+          infoWindow.open(map, marker);
       });
-      /*
-      $(thumbnail).on('click', function() {
-        infoWindow.setContent('<img src="' + url + '"/>');
-        infoWindow.open(map, marker);
-      });
-      */
     });
-    // Arranges images in a justified Gallery
-    // gallery.justifiedGallery();
   })
   // TODO: Add a more descriptive error alert/message
   .fail(function(jqXHR, error) {
