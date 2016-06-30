@@ -7,6 +7,7 @@ body {
   height: 100%;
   width: 100%;
   margin: 0;
+  padding: 0;
   background-color: #fff;
   font-family: 'Lalezar', sans-serif;
   text-transform: lowercase;
@@ -123,13 +124,20 @@ body {
   text-shadow   : 0 2px 1px rgba(255,255,255,.2);
 }
 
+.show {
+  visibility: visible;
+}
+
+.hide {
+  visibility: hidden;
+}
+
 #carousel {
   position: absolute;
   width: 100%;
   height: 29.5%;
   text-align: center;
   pointer-events: none;
-  /* background-color: pink; */
 }
 
 /* Gallery arrows */
@@ -138,18 +146,30 @@ body {
   vertical-align: middle;
   font-size: 6em;
   color: #fff;
-  text-shadow   : 0 2px 1px rgba(0,0,0,.5);
+  text-shadow : 0 2px 1px rgba(0,0,0,.5);
+  opacity: 0.75;
+}
+
+.gallery-arrows > p {
+  margin: 0;
   pointer-events: auto;
+  display: inline-block;
+}
+
+.gallery-arrows:hover {
+  color: #B300FF;
+  opacity: 1;
+  cursor: pointer;
 }
 
 #left-arrow {
   padding: 0 0 0 1%;
-  text-align: left;
+  float: left;
 }
 
 #right-arrow {
   padding: 0 1% 0 0;
-  text-align: right;
+  float: right;
 }
 
 /* Thumbnails in gallery */
@@ -179,8 +199,4 @@ body {
 /* Thumbnails in info windows */
 .infoThumb {
   /* width: 200px; */
-}
-
-.hide {
-  display: none;
 }
