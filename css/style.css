@@ -100,7 +100,7 @@ body {
 
 /* Image gallery */
 #gallery {
-  position: relative;
+  position: absolute;
   width: 100%;
   height: 29.5%;
   text-align: center;
@@ -121,6 +121,35 @@ body {
   opacity: 0.3;
   font-size: 2em;
   text-shadow   : 0 2px 1px rgba(255,255,255,.2);
+}
+
+#carousel {
+  position: absolute;
+  width: 100%;
+  height: 29.5%;
+  text-align: center;
+  pointer-events: none;
+  /* background-color: pink; */
+}
+
+/* Gallery arrows */
+.gallery-arrows {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 6em;
+  color: #fff;
+  text-shadow   : 0 2px 1px rgba(0,0,0,.5);
+  pointer-events: auto;
+}
+
+#left-arrow {
+  padding: 0 0 0 1%;
+  text-align: left;
+}
+
+#right-arrow {
+  padding: 0 1% 0 0;
+  text-align: right;
 }
 
 /* Thumbnails in gallery */
@@ -150,4 +179,8 @@ body {
 /* Thumbnails in info windows */
 .infoThumb {
   /* width: 200px; */
+}
+
+.hide {
+  display: none;
 }
