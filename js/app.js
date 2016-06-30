@@ -5,6 +5,7 @@ var counter = 1; // Counter for changing pages when gallery arrows are clicked
 var markers = []; // Array of map markers
 var gallery = $('#gallery');
 var search = $('.get-location');
+var carouselNav = $('#carousel');
 var leftArrow = $('#left-arrow');
 var rightArrow = $('#right-arrow');
 var latLng = [47.60621, -122.332071]; // Default lat/lng to Seattle, WA
@@ -160,21 +161,30 @@ $(function() {
     inputLocation = $(this).find('#address').val();
     gallery.html(''); // Clear the gallery upon each search
     geocodeAddress(inputLocation);
+    carouselNav.removeClass('hide'); // Show gallery navigation
   });
   // Populates gallery with next page of photos on click
   rightArrow.on('click', function() {
+    if (page >= 1) { // If gallery page is greater than or equal to 1
+      leftArrow.removeClass('hide'); // Show the back arrow
+    }
     removeMarkers(); // Remove all markers currently on map
     gallery.html(''); // Clear gallery
     counter++;
     page = counter;
     getPhotos(latLng);
+    console.log(page);
   });
   // Populates the gallery with the previus set of photos on click
   leftArrow.on('click', function() {
+    if (page <= 2) { // If gallery page is less than or equal to 2
+      leftArrow.addClass('hide'); // Hide the back arrow
+    }
     removeMarkers(); // Remove all markers currently on map
     gallery.html(''); // Clear gallery
     counter--;
     page = counter;
     getPhotos(latLng);
+    console.log(page);
   });
 });
