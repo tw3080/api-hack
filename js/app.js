@@ -1,16 +1,19 @@
 // Initialize variables
 var map;
 var inputLocation = '';
-var photoGallery  = [];
-var gallery       = $('#gallery');
-var search        = $('.get-location');
-var latLng        = [47.60621, -122.332071]; // Default lat/lng to Seattle, WA
-var googleKey     = 'AIzaSyBW-hUSjC0jN5IKre7PDMWgBBO2YV8EMng';
-var flickrKey     = 'bd5883080cd861f2e51ffc57c3e6b717';
-var radius        = 0.5; // Default search radius of 1 mile
-var accuracy      = 15; // Default accuracy, city level
-var perPage       = 5; // Default number of pictures to display per page in gallery
-var page          = 1; // Flickr page number
+var counter = 1; // Counter for changing pages when gallery arrows are clicked
+var markers = []; // Array of map markers
+var gallery = $('#gallery');
+var search = $('.get-location');
+var leftArrow = $('#left-arrow');
+var rightArrow = $('#right-arrow');
+var latLng = [47.60621, -122.332071]; // Default lat/lng to Seattle, WA
+var googleKey = 'AIzaSyBW-hUSjC0jN5IKre7PDMWgBBO2YV8EMng';
+var flickrKey = 'bd5883080cd861f2e51ffc57c3e6b717';
+var radius = 0.5; // Default search radius of 1 mile
+var accuracy = 15; // Default accuracy, city level
+var perPage = 5; // Default number of pictures to display per page in gallery
+var page = 1; // Flickr page number
 
 // Initialize map
 function initMap() {
@@ -119,6 +122,7 @@ function getPhotos(coordinate) {
           fillOpacity: 0.75,
         }
       });
+      markers.push(marker);
       // Larger thumbnail image to display in infoWindow
       var lrgImg = $('<img src="' + url + '"/>');
       /* Clicking a marker triggers an event which opens an infoWindow
@@ -142,12 +146,35 @@ function getPhotos(coordinate) {
   });
 }
 
+// Removes all map markers
+function removeMarkers() {
+  for (i = 0; i < markers.length; i++) {
+    markers[i].setMap(null);
+  }
+}
+
 // Execute on page load
 $(function() {
   search.submit(function(e) {
     e.preventDefault();
     inputLocation = $(this).find('#address').val();
-    gallery.html(''); // Clears the gallery upon each search
+    gallery.html(''); // Clear the gallery upon each search
     geocodeAddress(inputLocation);
+  });
+  // Populates gallery with next page of photos on click
+  rightArrow.on('click', function() {
+    removeMarkers(); // Remove all markers currently on map
+    gallery.html(''); // Clear gallery
+    counter++;
+    page = counter;
+    getPhotos(latLng);
+  });
+  // Populates the gallery with the previus set of photos on click
+  leftArrow.on('click', function() {
+    removeMarkers(); // Remove all markers currently on map
+    gallery.html(''); // Clear gallery
+    counter--;
+    page = counter;
+    getPhotos(latLng);
   });
 });
