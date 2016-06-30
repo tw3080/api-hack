@@ -249,7 +249,6 @@ function geocodeAddress(location) {
     data: params
   })
   .success(function(response) {
-    // console.log(response);
     latLng = [];
     latLng.push(response.results[0].geometry.location.lat);
     latLng.push(response.results[0].geometry.location.lng);
@@ -299,14 +298,13 @@ function getPhotos(coordinate) {
         item.secret +
         '.jpg';
       // Appends photos to #gallery
-      var thumbnail = '<div marker=' + '"marker' + i + '" class="thumbnail" style="background-image: url(' + url + ');"></div>';
+      var thumbnail = $('<div class="thumbnail" style="background-image: url(' + url + ');"></div>');
       gallery.append(thumbnail);
       // Store latitude and longitude of each item in variable
       var lat = item.latitude;
       var lng = item.longitude;
       // Create a marker on map for each photo
       var myLatLng = new google.maps.LatLng(lat,lng);
-      var markers = [];
       var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
@@ -318,27 +316,22 @@ function getPhotos(coordinate) {
           strokeOpacity: 1,
           fillColor: '#B300FF',
           fillOpacity: 0.75,
-        },
-        id: 'marker' + i
-        // title: 'Photo'
+        }
       });
-      markers.push(marker);
-      console.log(markers);
-      /* Clicking a marker triggers an event which opens a info window
-         displaying the details of a picture */
+      // Larger thumbnail image to display in infoWindow
+      var lrgImg = $('<img src="' + url + '"/>');
+      /* Clicking a marker triggers an event which opens an infoWindow
+         displaying a larger version of each image */
       google.maps.event.addListener(marker, 'click', function() {
-        // TODO: How do I add jQuery to setContent?
-        var thumbnail = $('<img class="infoThumb" src="' + url + '"/>');
-        infoWindow.setContent(thumbnail[0]);
+        infoWindow.setContent(lrgImg[0]);
         infoWindow.open(map, marker);
       });
-      // Shit below here is fucked
-      $('.thumbnail').click(function() {
-        var mapMarker ='#' + $(this).attr('marker');
-        // console.log(mapMarker);
-        google.maps.event.trigger(mapMarker, 'click');
-          infoWindow.setContent('<img class="infoThumb" src="' + url + '"/>');
-          infoWindow.open(map, marker);
+      /* Clicking an image in the gallery also triggers the above marker click
+         event to display a larger version of the image */
+      $(thumbnail).click(function() {
+        google.maps.event.trigger(marker, 'click');
+        infoWindow.setContent(lrgImg[0]);
+        infoWindow.open(map, marker);
       });
     });
   })
@@ -353,7 +346,7 @@ $(function() {
   search.submit(function(e) {
     e.preventDefault();
     inputLocation = $(this).find('#address').val();
-    gallery.html(''); // Clears the gallery upon new search
+    gallery.html(''); // Clears the gallery upon each search
     geocodeAddress(inputLocation);
   });
 });
