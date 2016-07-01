@@ -176,20 +176,28 @@ body {
   transition: all 0.35s ease;
 }
 
-.gallery-arrows:hover {
-  color: #fff;
-  opacity: 1;
-  cursor: pointer;
-}
-
 #left-arrow {
   padding: 0 0 0 1%;
   float: left;
 }
 
+/* Hovering over left arrow does not affect right arrow */
+#left-arrow:hover {
+  color: #fff;
+  opacity: 1;
+  cursor: pointer;
+}
+
 #right-arrow {
   padding: 0 1% 0 0;
   float: right;
+}
+
+/* Hovering over right arrow does not affect left arrow */
+#right-arrow:hover {
+  color: #fff;
+  opacity: 1;
+  cursor: pointer;
 }
 
 /* Thumbnails in gallery */
