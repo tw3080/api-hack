@@ -21,12 +21,10 @@ function initMap() {
   // Map object
   var mapProp = {
     // Center initializes to Seattle, WA
-    /* TODO: possibly use user's geolocation to initially center map? Or just
-       don't show a map before initial search? */
     center: new google.maps.LatLng(latLng[0], latLng[1]),
     zoom: 15, // Zoom defaults to city-level
-    mapTypeControl: false,
-    streetViewControl: false
+    mapTypeControl: false, // Remove map type options
+    streetViewControl: false // Remove street view
   };
   map = new google.maps.Map(document.getElementById('map'), mapProp);
 
@@ -54,15 +52,14 @@ function geocodeAddress(location) {
     data: params
   })
   .success(function(response) {
-    latLng = [];
+    latLng = []; // An array of coordinates which determines search area
     latLng.push(response.results[0].geometry.location.lat);
     latLng.push(response.results[0].geometry.location.lng);
     initMap();
     getPhotos(latLng);
   })
-  // TODO: Add a more descriptive error alert/message
   .fail(function(jqXHR, error) {
-    console.log('fail');
+    alert('Geocode was not successful');
   });
 }
 
@@ -90,9 +87,8 @@ function getPhotos(coordinate) {
     data: params,
   })
   .success(function(response) {
-    var infoWindow = new google.maps.InfoWindow();
+    var infoWindow = new google.maps.InfoWindow(); // infoWindow for larger thumbnails
     $.each(response.photos.photo, function(i, item) {
-      // console.log(item);
       var url = 'http://farm' +
         item.farm +
         '.staticflickr.com/' +
@@ -104,6 +100,7 @@ function getPhotos(coordinate) {
         '.jpg';
       // Appends photos to #gallery
       var thumbnail = $('<div class="thumbnail" style="background-image: url(' + url + ');"></div>');
+      // thumbnail.hide().appendTo(gallery).fadeIn();
       gallery.append(thumbnail);
       // Store latitude and longitude of each item in variable
       var lat = item.latitude;
@@ -123,6 +120,7 @@ function getPhotos(coordinate) {
           fillOpacity: 0.75,
         }
       });
+      // Add each marker to the array of markers
       markers.push(marker);
       // Larger thumbnail image to display in infoWindow
       var lrgImg = $('<img src="' + url + '"/>');
@@ -141,15 +139,15 @@ function getPhotos(coordinate) {
       });
     });
   })
-  // TODO: Add a more descriptive error alert/message
   .fail(function(jqXHR, error) {
-    console.log('fail');
+    alert('Photo search was not successful');
   });
 }
 
 // Removes all map markers
 function removeMarkers() {
   for (i = 0; i < markers.length; i++) {
+    // markers[i].setOpacity(0.0);
     markers[i].setMap(null);
   }
 }
@@ -159,8 +157,8 @@ $(function() {
   search.submit(function(e) {
     e.preventDefault();
     inputLocation = $(this).find('#address').val();
-    gallery.html(''); // Clear the gallery upon each search
-    geocodeAddress(inputLocation);
+    gallery.empty(); // Clear the gallery upon each search
+    geocodeAddress(inputLocation); // Geocode location wich user input
     carouselNav.removeClass('hide'); // Show gallery navigation
   });
   // Populates gallery with next page of photos on click
@@ -168,23 +166,27 @@ $(function() {
     if (page >= 1) { // If gallery page is greater than or equal to 1
       leftArrow.removeClass('hide'); // Show the back arrow
     }
-    removeMarkers(); // Remove all markers currently on map
-    gallery.html(''); // Clear gallery
-    counter++;
-    page = counter;
-    getPhotos(latLng);
-    console.log(page);
+    gallery.fadeOut(125, function() {
+      removeMarkers();
+      $(this).html('');
+      counter++;
+      page = counter;
+      getPhotos(latLng);
+      $(this).fadeIn();
+    });
   });
   // Populates the gallery with the previus set of photos on click
   leftArrow.on('click', function() {
     if (page <= 2) { // If gallery page is less than or equal to 2
       leftArrow.addClass('hide'); // Hide the back arrow
     }
-    removeMarkers(); // Remove all markers currently on map
-    gallery.html(''); // Clear gallery
-    counter--;
-    page = counter;
-    getPhotos(latLng);
-    console.log(page);
+    gallery.fadeOut(125, function() {
+      removeMarkers();
+      $(this).html('');
+      counter--;
+      page = counter;
+      getPhotos(latLng);
+      $(this).fadeIn();
+    });
   });
 });
