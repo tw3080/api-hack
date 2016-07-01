@@ -152,6 +152,11 @@ function removeMarkers() {
   }
 }
 
+// Recenters map to current search location
+function centerMap() {
+  map.setCenter(new google.maps.LatLng(latLng[0], latLng[1]));
+}
+
 // Execute on page load
 $(function() {
   search.submit(function(e) {
@@ -168,11 +173,12 @@ $(function() {
     }
     gallery.fadeOut(125, function() {
       removeMarkers();
-      $(this).html('');
+      $(this).empty(); // Empty contents of gallery
       counter++;
       page = counter;
       getPhotos(latLng);
       $(this).fadeIn();
+      centerMap();
     });
   });
   // Populates the gallery with the previus set of photos on click
@@ -182,11 +188,12 @@ $(function() {
     }
     gallery.fadeOut(125, function() {
       removeMarkers();
-      $(this).html('');
+      $(this).empty(); // Empty contents of gallery
       counter--;
       page = counter;
       getPhotos(latLng);
       $(this).fadeIn();
+      centerMap();
     });
   });
 });
