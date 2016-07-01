@@ -11,7 +11,7 @@ var rightArrow = $('#right-arrow');
 var latLng = [47.60621, -122.332071]; // Default lat/lng to Seattle, WA
 var googleKey = 'AIzaSyBW-hUSjC0jN5IKre7PDMWgBBO2YV8EMng';
 var flickrKey = 'bd5883080cd861f2e51ffc57c3e6b717';
-var radius = 0.5; // Default search radius of 1 mile
+var radius = 0.5; // Default search radius
 var accuracy = 15; // Default accuracy, city level
 var perPage = 5; // Default number of pictures to display per page in gallery
 var page = 1; // Flickr page number
@@ -100,7 +100,6 @@ function getPhotos(coordinate) {
         '.jpg';
       // Appends photos to #gallery
       var thumbnail = $('<div class="thumbnail" style="background-image: url(' + url + ');"></div>');
-      // thumbnail.hide().appendTo(gallery).fadeIn();
       gallery.append(thumbnail);
       // Store latitude and longitude of each item in variable
       var lat = item.latitude;
@@ -122,7 +121,7 @@ function getPhotos(coordinate) {
       });
       // Add each marker to the array of markers
       markers.push(marker);
-      // Larger thumbnail image to display in infoWindow
+      // Larger image to display in infoWindow
       var lrgImg = $('<img src="' + url + '"/>');
       /* Clicking a marker triggers an event which opens an infoWindow
          displaying a larger version of each image */
@@ -147,7 +146,6 @@ function getPhotos(coordinate) {
 // Removes all map markers
 function removeMarkers() {
   for (i = 0; i < markers.length; i++) {
-    // markers[i].setOpacity(0.0);
     markers[i].setMap(null);
   }
 }
@@ -163,7 +161,7 @@ $(function() {
     e.preventDefault();
     inputLocation = $(this).find('#address').val();
     gallery.empty(); // Clear the gallery upon each search
-    geocodeAddress(inputLocation); // Geocode location wich user input
+    geocodeAddress(inputLocation); // Geocode location which user input
     carouselNav.removeClass('hide'); // Show gallery navigation
   });
   // Populates gallery with next page of photos on click
@@ -181,7 +179,7 @@ $(function() {
       centerMap();
     });
   });
-  // Populates the gallery with the previus set of photos on click
+  // Populates the gallery with the previous set of photos on click
   leftArrow.on('click', function() {
     if (page <= 2) { // If gallery page is less than or equal to 2
       leftArrow.addClass('hide'); // Hide the back arrow
