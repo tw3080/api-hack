@@ -1,0 +1,26 @@
+{
+  "name": "mappr",
+  "version": "1.0.0",
+  "description": "<h1>API Hack</h1>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tw3080/mappr.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tw3080/mappr/issues"
+  },
+  "homepage": "https://github.com/tw3080/mappr#readme",
+  "dependencies": {
+    "angular": "^1.5.7",
+    "font-awesome": "^4.6.3",
+    "fontawesome-markers": "^4.6.1",
+    "jquery": "^3.0.0",
+    "normalize.css": "^4.2.0"
+  }
+}
