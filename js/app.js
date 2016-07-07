@@ -51,7 +51,7 @@ function geocodeAddress(location) {
     type: 'GET',
     data: params
   })
-  .success(function(response) {
+  .done(function(response) {
     latLng = []; // An array of coordinates which determines search area
     latLng.push(response.results[0].geometry.location.lat);
     latLng.push(response.results[0].geometry.location.lng);
@@ -86,7 +86,7 @@ function getPhotos(coordinate) {
     type: 'GET',
     data: params,
   })
-  .success(function(response) {
+  .done(function(response) {
     var infoWindow = new google.maps.InfoWindow(); // infoWindow for larger thumbnails
     $.each(response.photos.photo, function(i, item) {
       var url = 'http://farm' +
