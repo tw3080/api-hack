@@ -1,16 +1,21 @@
 {
   "name": "mappr",
   "version": "1.0.0",
-  "description": "<h1>API Hack</h1>",
+  "description": "Integrates Google Maps API/Flickr API to allow users to search for locations and show a map displaying markers w/ geolocations of Flickr photos taken at that location",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build:css",
+    "watch": "npm run watch:css",
+    "build:css": "npm run clean:css && lessc --source-map less/style.less css/style.css",
+    "watch:css": "npm run build:css && chokidar less/style.less -c 'npm run build:css'",
+    "clean:css": "rm -f css/style.css css/style.css.map"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tw3080/mappr.git"
   },
-  "author": "",
+  "author": "Taylor Welling",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/tw3080/mappr/issues"
@@ -22,5 +27,9 @@
     "fontawesome-markers": "^4.6.1",
     "jquery": "^3.0.0",
     "normalize.css": "^4.2.0"
+  },
+  "devDependencies": {
+    "chokidar-cli": "^1.2.0",
+    "less": "^2.7.1"
   }
 }
