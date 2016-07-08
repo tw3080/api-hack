@@ -8,7 +8,6 @@ body {
   font-family: 'Lalezar', sans-serif;
   text-transform: lowercase;
 }
-
 .main-container {
   margin: auto;
   width: 100%;
@@ -20,19 +19,17 @@ body {
   right: 0;
   text-align: left;
 }
-
 /* Page Heading */
 .heading h1 {
   position: absolute;
   margin: -14px 0 0 8px;
-  color: #B300FF;
+  color: #b300ff;
   font-size: 5em;
   font-weight: 400;
   letter-spacing: -0.05em;
-  text-shadow: 0 2px 1px rgba(0,0,0,.2);
+  text-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
   z-index: 99;
 }
-
 /* Search bar */
 .search {
   position: absolute;
@@ -41,16 +38,19 @@ body {
   width: 30%;
   z-index: 99;
 }
-
 #address,
 #submit-button {
-  border: 1px solid #B300FF;
-  box-shadow: 0 2px 1px rgba(0,0,0,.2);
+  border: 1px solid #b300ff;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
   font-size: 1em;
   font-family: 'Lato', sans-serif;
   text-transform: lowercase;
 }
-
+#address:focus,
+#submit-button:focus {
+  outline: none;
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.4);
+}
 #address {
   width: 75%;
   height: 37px;
@@ -60,44 +60,33 @@ body {
   box-sizing: border-box;
   float: left;
 }
-
 #submit-button {
   margin: 0;
   min-width: 15%;
   max-width: 20%;
   height: 37px;
   border-radius: 0 5px 5px 0;
-  background-color: #B300FF;
+  background-color: #b300ff;
   color: #fff;
   float: left;
   transition: all 0.2s ease;
 }
-
-#address:focus,
-#submit-button:focus {
-  outline: none;
-  box-shadow: 0px 2px 1px rgba(0,0,0,.4);
-}
-
 #submit-button:hover {
-  color: #B300FF;
+  color: #b300ff;
   background-color: #fff;
   cursor: pointer;
 }
-
 /* Map */
 #map {
   height: 69.5%;
   width: 100%;
 }
-
 /* Divider between map and gallery */
 .divider {
   height: 1%;
-  background-color: #B300FF;
+  background-color: #b300ff;
   /* box-shadow: 0px 2px 20px rgba(0,0,0,1); */
 }
-
 /* Image gallery */
 #gallery {
   position: absolute;
@@ -106,7 +95,12 @@ body {
   text-align: center;
   background-color: #380050;
 }
-
+#gallery:hover > div {
+  opacity: 0.5;
+}
+#gallery:hover > div:hover {
+  opacity: 1.0;
+}
 /* Aligns greeting text vertically */
 .vertical-align-wrapper {
   position: absolute;
@@ -114,23 +108,19 @@ body {
   height: 100%;
   display: table;
 }
-
 .greeting-text {
   display: table-cell;
   vertical-align: middle;
   opacity: 0.3;
   font-size: 2em;
-  text-shadow   : 0 2px 1px rgba(255,255,255,.2);
+  text-shadow: 0 2px 1px rgba(255, 255, 255, 0.2);
 }
-
 .show {
   visibility: visible;
 }
-
 .hide {
   visibility: hidden;
 }
-
 #carousel {
   position: absolute;
   width: 100%;
@@ -138,51 +128,43 @@ body {
   text-align: center;
   pointer-events: none;
 }
-
 /* Gallery arrows */
 .gallery-arrows {
   display: table-cell;
   vertical-align: middle;
   font-size: 6em;
-  color: #B300FF;
-  text-shadow : 0 2px 1px rgba(0,0,0,.3);
+  color: #b300ff;
+  text-shadow: 0 2px 1px rgba(0, 0, 0, 0.3);
   /* opacity: 1; */
 }
-
 .gallery-arrows > p {
   margin: 0;
   pointer-events: auto;
   display: inline-block;
   transition: all 0.35s ease;
 }
-
 #left-arrow {
   padding: 0 0 0 1%;
   float: left;
+  /* Hovering over left arrow does not affect right arrow */
 }
-
-/* Hovering over left arrow does not affect right arrow */
 #left-arrow:hover {
   color: #fff;
   opacity: 1;
   cursor: pointer;
 }
-
 #right-arrow {
   padding: 0 1% 0 0;
   float: right;
+  /* Hovering over right arrow does not affect left arrow */
 }
-
-/* Hovering over right arrow does not affect left arrow */
 #right-arrow:hover {
   color: #fff;
   opacity: 1;
   cursor: pointer;
 }
-
 /* Thumbnails in gallery */
 .thumbnail {
-  background-color: black;
   margin: 0 0 -9px 0;
   width: 20%;
   height: 100%;
@@ -192,15 +174,7 @@ body {
   background-repeat: no-repeat;
   transition: all 0.5s ease;
 }
-
 .thumbnail:hover {
   cursor: pointer;
 }
-
-#gallery:hover > div {
-  opacity: 0.5;
-}
-
-#gallery:hover > div:hover {
-  opacity: 1.0;
-}
+/*# sourceMappingURL=style.css.map */
