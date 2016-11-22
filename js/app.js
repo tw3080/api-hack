@@ -11,10 +11,14 @@ var rightArrow = $('#right-arrow');
 var latLng = [47.60621, -122.332071]; // Default lat/lng to Seattle, WA
 var googleKey = 'AIzaSyBW-hUSjC0jN5IKre7PDMWgBBO2YV8EMng';
 var flickrKey = 'bd5883080cd861f2e51ffc57c3e6b717';
-var radius = 0.5; // Default search radius
-var accuracy = 15; // Default accuracy, city level
-var perPage = 5; // Default number of pictures to display per page in gallery
 var page = 1; // Flickr page number
+
+var zoom;
+if (screen.width > 320) {
+    zoom = 15;
+} else {
+    zoom = 13;
+}
 
 // Initialize map
 function initMap() {
@@ -22,9 +26,10 @@ function initMap() {
   var mapProp = {
     // Center initializes to Seattle, WA
     center: new google.maps.LatLng(latLng[0], latLng[1]),
-    zoom: 15, // Zoom defaults to city-level
+    zoom: zoom, // Zoom defaults to city-level
     mapTypeControl: false, // Remove map type options
-    streetViewControl: false // Remove street view
+    streetViewControl: false, // Remove street view
+    fullscreenControl: false // Remove full screen control
   };
   map = new google.maps.Map(document.getElementById('map'), mapProp);
 
@@ -65,6 +70,17 @@ function geocodeAddress(location) {
 
 // Gets flickr photos (public only) based on location inputted by the user
 function getPhotos(coordinate) {
+    var perPage; // Default number of pictures to display per page in gallery
+    var radius = 0.5; // Default search radius
+    var accuracy = 15; // Default accuracy, city level
+
+    if (screen.width > 320) {
+        perPage = 5;
+        radius = 0.5;
+        accuracy = 15;
+    } else {
+        perPage = 2;
+    }
   var params = {
     format: 'json',
     method: 'flickr.photos.search',
@@ -122,12 +138,14 @@ function getPhotos(coordinate) {
       // Add each marker to the array of markers
       markers.push(marker);
       // Larger image to display in infoWindow
-      var lrgImg = $('<img src="' + url + '"/>');
+      var lrgImg = $('<img class="infoThumb" src="' + url + '"/>');
       /* Clicking a marker triggers an event which opens an infoWindow
          displaying a larger version of each image */
       google.maps.event.addListener(marker, 'click', function() {
         infoWindow.setContent(lrgImg[0]);
         infoWindow.open(map, marker);
+
+        // map.setCenter(marker.getPosition());
       });
       /* Clicking an image in the gallery also triggers the above marker click
          event to display a larger version of the image */
@@ -135,6 +153,8 @@ function getPhotos(coordinate) {
         google.maps.event.trigger(marker, 'click');
         infoWindow.setContent(lrgImg[0]);
         infoWindow.open(map, marker);
+
+        // map.setCenter(marker.getPosition());
       });
     });
   })
