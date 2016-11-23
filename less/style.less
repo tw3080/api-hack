@@ -40,6 +40,7 @@ body {
     letter-spacing: -0.05em;
     text-shadow: 0 2px 1px rgba(0,0,0,.2);
     z-index: 99;
+    opacity: 0.8;
   }
 }
 
@@ -50,6 +51,7 @@ body {
   margin: 10px auto 0 auto;
   width: 30%;
   z-index: 99;
+  opacity: 0.8;
 }
 
 #address,
@@ -79,14 +81,13 @@ body {
 
 #submit-button {
   margin: 0;
-  min-width: 15%;
-  max-width: 20%;
   height: @search-bar-height;
   border-radius: 0 5px 5px 0;
   background-color: @accent-color;
   color: #fff;
   float: left;
   transition: all 0.2s ease;
+  width: 25%;
   &:hover {
     color: @accent-color;
     background-color: #fff;
@@ -208,33 +209,54 @@ body {
   }
 }
 
-@media only screen and (max-width: 320px) {
+/* Responsiveness */
+
+@media only screen and (max-width: 374px) {
+    .thumbnail {
+        width: 50%;
+    }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 414px) {
+    .thumbnail {
+        width: 25%;
+    }
+}
+
+@media only screen and (min-width: 415px) {
+    .thumbnail {
+        width: 20%;
+    }
+}
+
+@media only screen and (max-width: 414px) {
+    .search {
+        margin: 10px auto 0 auto;
+        left: 0;
+        opacity: 0.8;
+        right: 0;
+        width: 95%;
+    }
+
+    .infoThumb {
+        width: 250px;
+    }
+}
+
+@media only screen and (min-width: 415px) and (max-width: 768px) {
+    .search {
+        left: 2.5%;
+        width: 24.6rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
     .heading {
         h1 {
-            font-size: 2rem;
-            margin: 0 0 0 8px;
+            font-size: 1.8rem;
+            margin: 48px 0 0 2.5%;
         }
     }
-
-    .search {
-        left: 9px;
-        margin: 9px auto 0 auto;
-        width: 97%;
-    }
-
-    #submit-button {
-        min-width: 22%;
-    }
-
-    /*
-    #map {
-        height: 64.5%;
-    }
-
-    #carousel {
-        height: 34.5%;
-    }
-    */
 
     #right-arrow {
         padding: 0 2% 0 0;
@@ -244,21 +266,7 @@ body {
         padding: 0 0 0 2%;
     }
 
-    /*
-    #gallery {
-        height: 34.5%;
-    }
-    */
-
     .gallery-arrows {
         font-size: 4rem;
-    }
-
-    .thumbnail {
-        width: 50%;
-    }
-
-    .infoThumb {
-        width: 250px;
     }
 }
