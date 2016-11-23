@@ -15,7 +15,7 @@ var page = 1; // Flickr page number
 var zoom;
 
 /* Change the zoom level depending on screen size */
-if (screen.width > 320) {
+if (screen.width > 415) {
     zoom = 15;
 } else {
     zoom = 13;
