@@ -12,8 +12,9 @@ var latLng = [47.60621, -122.332071]; // Default lat/lng to Seattle, WA
 var googleKey = 'AIzaSyBW-hUSjC0jN5IKre7PDMWgBBO2YV8EMng';
 var flickrKey = 'bd5883080cd861f2e51ffc57c3e6b717';
 var page = 1; // Flickr page number
-
 var zoom;
+
+/* Change the zoom level depending on screen size */
 if (screen.width > 320) {
     zoom = 15;
 } else {
@@ -74,13 +75,15 @@ function getPhotos(coordinate) {
     var radius = 0.5; // Default search radius
     var accuracy = 15; // Default accuracy, city level
 
-    if (screen.width > 320) {
-        perPage = 5;
-        radius = 0.5;
-        accuracy = 15;
-    } else {
+    /* Determines how many photos to get per page based on screen widths */
+    if (screen.width < 375) {
         perPage = 2;
+    } else if (screen.width >= 375 && screen.width <= 414) {
+        perPage = 4;
+    } else {
+        perPage = 5;
     }
+
   var params = {
     format: 'json',
     method: 'flickr.photos.search',
