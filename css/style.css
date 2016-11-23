@@ -1,5 +1,5 @@
-html,
-body {
+body,
+html {
   height: 100%;
   width: 100%;
   margin: 0;
@@ -35,7 +35,7 @@ body {
 .search {
   position: absolute;
   left: 224px;
-  margin: 10px auto 0 auto;
+  margin: 10px auto 0;
   width: 30%;
   z-index: 99;
   opacity: 0.8;
@@ -51,7 +51,7 @@ body {
 #address:focus,
 #submit-button:focus {
   outline: none;
-  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.4);
 }
 #address {
   width: 75%;
@@ -110,11 +110,13 @@ body {
   display: table;
 }
 .greeting-text {
+  color: #b300ff;
   display: table-cell;
+  padding: 0 1rem;
   vertical-align: middle;
-  opacity: 0.3;
+  opacity: 0.8;
   font-size: 2em;
-  text-shadow: 0 2px 1px rgba(255, 255, 255, 0.2);
+  text-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 .show {
   visibility: visible;
@@ -166,7 +168,7 @@ body {
 }
 /* Thumbnails in gallery */
 .thumbnail {
-  margin: 0 0 -9px 0;
+  margin: 0 0 -9px;
   width: 20%;
   height: 100%;
   display: inline-block;
@@ -196,11 +198,14 @@ body {
 }
 @media only screen and (max-width: 414px) {
   .search {
-    margin: 10px auto 0 auto;
+    margin: 10px auto 0;
     left: 0;
     opacity: 0.8;
     right: 0;
     width: 95%;
+  }
+  .greeting-text {
+    font-size: 1.5rem;
   }
   .infoThumb {
     width: 250px;

@@ -1,255 +1,249 @@
 // Color variables
 @accent-color: #b300ff;
 @gallery-background: #380050;
-
 // Height variables
 @gallery-height: 29.5%;
 @search-bar-height: 37px;
 
-html,
-body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: #380050;
-  font-family: 'Lalezar', sans-serif;
-  text-transform: lowercase;
+body,
+html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #380050;
+    font-family: 'Lalezar', sans-serif;
+    text-transform: lowercase;
 }
 
 .main-container {
-  margin: auto;
-  width: 100%;
-  height: 100%;
-  position: relative;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  text-align: left;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: left;
 }
-
 /* Page Heading */
 .heading {
-  h1 {
-    position: absolute;
-    margin: -14px 0 0 8px;
-    color: @accent-color;
-    font-size: 5em;
-    font-weight: 400;
-    letter-spacing: -0.05em;
-    text-shadow: 0 2px 1px rgba(0,0,0,.2);
-    z-index: 99;
-    opacity: 0.8;
-  }
+    h1 {
+        position: absolute;
+        margin: -14px 0 0 8px;
+        color: @accent-color;
+        font-size: 5em;
+        font-weight: 400;
+        letter-spacing: -0.05em;
+        text-shadow: 0 2px 1px rgba(0,0,0,.2);
+        z-index: 99;
+        opacity: 0.8;
+    }
 }
-
 /* Search bar */
 .search {
-  position: absolute;
-  left: 224px;
-  margin: 10px auto 0 auto;
-  width: 30%;
-  z-index: 99;
-  opacity: 0.8;
+    position: absolute;
+    left: 224px;
+    margin: 10px auto 0;
+    width: 30%;
+    z-index: 99;
+    opacity: 0.8;
 }
 
 #address,
 #submit-button {
-  border: 1px solid @accent-color;
-  box-shadow: 0 2px 1px rgba(0,0,0,.2);
-  font-size: 1em;
-  font-family: 'Lato', sans-serif;
-  text-transform: lowercase;
+    border: 1px solid @accent-color;
+    box-shadow: 0 2px 1px rgba(0,0,0,.2);
+    font-size: 1em;
+    font-family: 'Lato', sans-serif;
+    text-transform: lowercase;
 }
 
 #address:focus,
 #submit-button:focus {
-  outline: none;
-  box-shadow: 0px 2px 1px rgba(0,0,0,.4);
+    outline: none;
+    box-shadow: 0 2px 1px rgba(0,0,0,.4);
 }
 
 #address {
-  width: 75%;
-  height: @search-bar-height;
-  padding: 0 0 0 10px;
-  border-right: 0;
-  border-radius: 5px 0 0 5px;
-  box-sizing: border-box;
-  float: left;
+    width: 75%;
+    height: @search-bar-height;
+    padding: 0 0 0 10px;
+    border-right: 0;
+    border-radius: 5px 0 0 5px;
+    box-sizing: border-box;
+    float: left;
 }
 
 #submit-button {
-  margin: 0;
-  height: @search-bar-height;
-  border-radius: 0 5px 5px 0;
-  background-color: @accent-color;
-  color: #fff;
-  float: left;
-  transition: all 0.2s ease;
-  width: 25%;
-  &:hover {
-    color: @accent-color;
-    background-color: #fff;
-    cursor: pointer;
-  }
-}
+    margin: 0;
+    height: @search-bar-height;
+    border-radius: 0 5px 5px 0;
+    background-color: @accent-color;
+    color: #fff;
+    float: left;
+    transition: all 0.2s ease;
+    width: 25%;
 
+    &:hover {
+        color: @accent-color;
+        background-color: #fff;
+        cursor: pointer;
+    }
+}
 /* Map */
 #map {
-  height: 69.5%;
-  width: 100%;
+    height: 69.5%;
+    width: 100%;
 }
-
 /* Divider between map and gallery */
 .divider {
-  height: 1%;
-  background-color: @accent-color;
-  /* box-shadow: 0px 2px 20px rgba(0,0,0,1); */
+    height: 1%;
+    background-color: @accent-color;
+    /* box-shadow: 0px 2px 20px rgba(0,0,0,1); */
 }
-
 /* Image gallery */
 #gallery {
-  position: absolute;
-  width: 100%;
-  height: @gallery-height;
-  text-align: center;
-  background-color: @gallery-background;
-  &:hover > div {
-    opacity: 0.5;
-    &:hover {
-      opacity: 1.0;
-    }
-  }
-}
+    position: absolute;
+    width: 100%;
+    height: @gallery-height;
+    text-align: center;
+    background-color: @gallery-background;
 
+    &:hover > div {
+        opacity: 0.5;
+
+        &:hover {
+            opacity: 1.0;
+        }
+    }
+}
 /* Aligns greeting text vertically */
 .vertical-align-wrapper {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: table;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: table;
 }
 
 .greeting-text {
-  display: table-cell;
-  vertical-align: middle;
-  opacity: 0.3;
-  font-size: 2em;
-  text-shadow   : 0 2px 1px rgba(255,255,255,.2);
+    color: @accent-color;
+    display: table-cell;
+    padding: 0 1rem;
+    vertical-align: middle;
+    opacity: 0.8;
+    font-size: 2em;
+    text-shadow: 0 2px 1px rgba(0,0,0,.2);
 }
 
 .show {
-  visibility: visible;
+    visibility: visible;
 }
 
 .hide {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 #carousel {
-  position: absolute;
-  width: 100%;
-  height: @gallery-height;
-  text-align: center;
-  pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: @gallery-height;
+    text-align: center;
+    pointer-events: none;
 }
-
 /* Gallery arrows */
 .gallery-arrows {
-  display: table-cell;
-  vertical-align: middle;
-  font-size: 6em;
-  color: @accent-color;
-  text-shadow : 0 2px 1px rgba(0,0,0,.3);
-  /* opacity: 1; */
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 6em;
+    color: @accent-color;
+    text-shadow: 0 2px 1px rgba(0,0,0,.3);
+    /* opacity: 1; */
 }
 
 .gallery-arrows > p {
-  margin: 0;
-  pointer-events: auto;
-  display: inline-block;
-  transition: all 0.35s ease;
+    margin: 0;
+    pointer-events: auto;
+    display: inline-block;
+    transition: all 0.35s ease;
 }
 
 #left-arrow {
-  padding: 0 0 0 1%;
-  float: left;
-  /* Hovering over left arrow does not affect right arrow */
-  &:hover {
-    color: #fff;
-    opacity: 1;
-    cursor: pointer;
-  }
+    padding: 0 0 0 1%;
+    float: left;
+    /* Hovering over left arrow does not affect right arrow */
+    &:hover {
+        color: #fff;
+        opacity: 1;
+        cursor: pointer;
+    }
 }
 
 #right-arrow {
-  padding: 0 1% 0 0;
-  float: right;
-  /* Hovering over right arrow does not affect left arrow */
-  &:hover {
-    color: #fff;
-    opacity: 1;
-    cursor: pointer;
-  }
+    padding: 0 1% 0 0;
+    float: right;
+    /* Hovering over right arrow does not affect left arrow */
+    &:hover {
+        color: #fff;
+        opacity: 1;
+        cursor: pointer;
+    }
 }
-
 /* Thumbnails in gallery */
 .thumbnail {
-  margin: 0 0 -9px 0;
-  width: 20%;
-  height: 100%;
-  display: inline-block;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  transition: all 0.5s ease;
-  &:hover {
-    cursor: pointer;
-  }
+    margin: 0 0 -9px;
+    width: 20%;
+    height: 100%;
+    display: inline-block;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: all 0.5s ease;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
-
 /* Responsiveness */
-
 @media only screen and (max-width: 374px) {
     .thumbnail {
         width: 50%;
     }
 }
-
 @media only screen and (min-width: 375px) and (max-width: 414px) {
     .thumbnail {
         width: 25%;
     }
 }
-
 @media only screen and (min-width: 415px) {
     .thumbnail {
         width: 20%;
     }
 }
-
 @media only screen and (max-width: 414px) {
     .search {
-        margin: 10px auto 0 auto;
+        margin: 10px auto 0;
         left: 0;
         opacity: 0.8;
         right: 0;
         width: 95%;
     }
 
+    .greeting-text {
+        font-size: 1.5rem;
+    }
+
     .infoThumb {
         width: 250px;
     }
 }
-
 @media only screen and (min-width: 415px) and (max-width: 768px) {
     .search {
         left: 2.5%;
         width: 24.6rem;
     }
 }
-
 @media only screen and (max-width: 768px) {
     .heading {
         h1 {
