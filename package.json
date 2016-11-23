@@ -2,14 +2,22 @@
   "name": "mappr",
   "version": "1.0.0",
   "description": "Integrates Google Maps API/Flickr API to allow users to search for locations and show a map displaying markers w/ geolocations of Flickr photos taken at that location",
-  "main": "index.js",
+  "main": "js/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run build:css",
-    "watch": "npm run watch:css",
-    "build:css": "npm run clean:css && lessc --source-map less/style.less css/style.css",
-    "watch:css": "npm run build:css && chokidar less/style.less -c 'npm run build:css'",
-    "clean:css": "rm -f css/style.css css/style.css.map"
+    "build": "npm run build:css && npm run build:js",
+    "watch": "npm run watch:css && npm run watch:js",
+    "build:css": "npm run build:css:unminified && npm run build:css:minified",
+    "watch:css": "npm run watch:css:unminified && run npm watch:css:minified",
+    "build:css:unminified": "npm run clean:css:unminified && lessc --source-map less/style.less css/style.css",
+    "watch:css:unminified": "npm run build:css:unminified && chokidar less/style.less -c \"npm run build:css:unminified\"",
+    "clean:css:unminified": "rm -f css/style.css css/style.css.map",
+    "build:css:minified": "npm run clean:css:minified && lessc --clean-css --source-map less/style.less css/style.min.css",
+    "watch:css:minified": "npm run build:css:minified && chokidar less/style.less -c 'npm run build:css:minified'",
+    "clean:css:minified": "rm -f css/style.min.css css/style.min.css.map",
+    "build:js": "npm run clean:js && webpack",
+    "watch:js": "npm run build:js && webpack --watch",
+    "clean:js": "rm -f js/$npm_package_name.$npm_package_version.js js/$npm_package_name.$npm_package_version.js.map"
   },
   "repository": {
     "type": "git",
@@ -30,6 +38,8 @@
   },
   "devDependencies": {
     "chokidar-cli": "^1.2.0",
-    "less": "^2.7.1"
+    "less": "^2.7.1",
+    "less-plugin-clean-css": "^1.5.1",
+    "webpack": "^1.13.1"
   }
 }
