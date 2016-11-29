@@ -75,7 +75,7 @@ function getPhotos(coordinate) {
     var radius = 0.5; // Default search radius
     var accuracy = 15; // Default accuracy, city level
 
-    /* Determines how many photos to get per page based on screen widths */
+    // Determines how many photos to get per page based on screen widths
     if (screen.width < 375) {
         perPage = 2;
     } else if (screen.width >= 375 && screen.width <= 414) {
