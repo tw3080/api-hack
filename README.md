@@ -8,7 +8,7 @@ Mappr is an interactive gallery and map of Flickr photos which integrates the Fl
 
 ## Walkthrough
 
-## Home
+### Home
 <p align="center">
     <img src="./img/home.png">
 </p>
@@ -29,7 +29,7 @@ After the user searches for a location, the map and gallery will populate. Click
 
 Users can click the left and right arrows in the gallery carousel to view more images, and the map markers will update accordingly.
 
-### Expand images
+### Expand Images
 <p align="center">
     <img src="./img/info-window.png">
 </p>
